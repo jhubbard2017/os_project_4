@@ -236,7 +236,7 @@ int main(int argc, const char * argv[]) {
 	if ((NUMBER_OF_RESOURCES + 1) == argc) {
 		printf("\n Resources available:\n");
 		for (int i = 0; i < NUMBER_OF_RESOURCES; i++) { 
-			available[i] = atoi(argv[i]);
+			available[i] = atoi(argv[i + 1]);
 			printf("%d, ", available[i]);	
 		}
 		printf("\n");
