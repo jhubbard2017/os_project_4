@@ -126,7 +126,7 @@ int request_resources(int customer, int resources[]) {
 	returns:
 		int
 	*/
-	printf("\nRecieved request from customer: %d", customer);
+	printf("\nRecieved request from customer: %d\n", customer);
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", resources[i]);
 	printf("\n");
 
