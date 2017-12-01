@@ -126,7 +126,7 @@ int request_resources(int customer, int resources[]) {
 	returns:
 		int
 	*/
-	printf("\n Recieved request from customer: %d", customer);
+	printf("\nRecieved request from customer: %d", customer);
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", resources[i]);
 	printf("\n");
 
@@ -134,7 +134,7 @@ int request_resources(int customer, int resources[]) {
 		if (resources[i] > need[customer][i]) return 1;
 	}
 
-	printf("\n Resources available:\n");
+	printf("\nResources available:\n");
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", available[i]);
 	printf("\n");
 
@@ -195,19 +195,19 @@ void *create_thread(void *customer) {
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) request[i] = rand() % available[i];
 
 	if (request_resources(customer_number, request) < 0) {
-		printf("%d Customer Request Denied.\n", customer_number);
+		printf("Customer %d: Request Denied.\n", customer_number);
 	} else {
 		flag = 1;
-		printf("%d Customer Request Accepted.\n", customer_number);
+		printf("Customer %d: Request Accepted.\n", customer_number);
 	}
-	printf("\nRequest:\n");
+	printf("Request:\n");
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", request[i]);
 	printf("\n");
 
 	if (flag == 1) {
 		sleep(rand() % 10);
 		release_resources(customer_number, request);
-		printf("\n Released resources from customer: %d", customer_number);
+		printf("\nReleased resources from customer: %d\n", customer_number);
 	}
 }
 
@@ -218,11 +218,12 @@ void show_matrix(int matrix[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES], char *nam
 		matrix: array[int][int]
 		name: char*
 	*/
-	printf("Matrix: %s\n", name);
+	printf("\nMatrix: %s\n", name);
 	for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
 		for (int j = 0; j < NUMBER_OF_RESOURCES; j++) printf("%d, ", matrix[i][j]);
 		printf("\n");
 	}
+	printf("\n");
 }
 
 int main(int argc, const char * argv[]) {
@@ -231,12 +232,14 @@ int main(int argc, const char * argv[]) {
 	int count = 40;
 	pthread_t tid;
 
+	printf("Program started.\n\n");
+
 	// Get number of customers
 	printf("\nNumber of Customers: ");
 	scanf("%d", &customer_count);
 
 	if ((NUMBER_OF_RESOURCES + 1) == argc) {
-		printf("\n Resources available:\n");
+		printf("\nResources available:\n");
 		for (int i = 0; i < NUMBER_OF_RESOURCES; i++) { 
 			available[i] = atoi(argv[i + 1]);
 			printf("%d, ", available[i]);	
