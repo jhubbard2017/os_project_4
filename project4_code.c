@@ -234,10 +234,6 @@ int main(int argc, const char * argv[]) {
 
 	printf("Program started.\n\n");
 
-	// Get number of customers
-	printf("\nNumber of Customers: ");
-	scanf("%d", &customer_count);
-
 	if ((NUMBER_OF_RESOURCES + 1) == argc) {
 		printf("\nResources available:\n");
 		for (int i = 0; i < NUMBER_OF_RESOURCES; i++) { 
@@ -255,7 +251,7 @@ int main(int argc, const char * argv[]) {
 	show_matrix(need, "Need");
 
 	for (int i = 0; i < count; i++) {
-		for (int j = 0; j < customer_count; j++) {
+		for (int j = 0; j < NUMBER_OF_CUSTOMERS; j++) {
 			printf("\nCreating customer with id: %d", j);
 			pthread_create(&tid, NULL, create_thread, (void *)j);
 		}
