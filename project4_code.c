@@ -35,6 +35,7 @@ int need[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
 void show_matrix(int array[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES], char *array_name);
 int request_resources(int customer, int resources[]);
 int release_resources(int customer, int resources[]);
+int check_if_safe();
 
 
 void init_maximum() {
