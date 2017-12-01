@@ -23,7 +23,6 @@ Instructor: Dr. Hong
 // Mutexes
 pthread_mutex_t mAvailable;
 pthread_mutex_t mAllocation;
-pthread_mutex_t mMaximum;
 pthread_mutex_t mNeed;
 
 // Matrices for banker
