@@ -233,7 +233,7 @@ int main(int argc, const char * argv[]) {
 	printf("\nNumber of Customers: ");
 	scanf("%d", &customer_count);
 
-	if (NUMBER_OF_RESOURCES + 1 == argc) {
+	if ((NUMBER_OF_RESOURCES + 1) == argc) {
 		printf("\n Resources available:\n");
 		for (int i = 0; i < NUMBER_OF_RESOURCES; i++) { 
 			available[i] = atoi(argv[i]);
