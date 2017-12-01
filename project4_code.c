@@ -43,7 +43,7 @@ void init_maximum() {
 	/* Method to initialize the maximum matrix with random values*/
 	srand(time(NULL));
 	for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
-		for (int j = 0; i < NUMBER_OF_RESOURCES; i++) {
+		for (int j = 0; j < NUMBER_OF_RESOURCES; j++) {
 			maximum[i][j] = rand() % available[j];
 			allocation[i][j] = 0;
 		}
@@ -256,7 +256,7 @@ int main(int argc, const char * argv[]) {
 
 	for (int i = 0; i < count; i++) {
 		for (int j = 0; j < customer_count; j++) {
-			printf("\n Creating customer with id: %d", j);
+			printf("\nCreating customer with id: %d", j);
 			pthread_create(&tid, NULL, create_thread, (void *)j);
 		}
 	}
