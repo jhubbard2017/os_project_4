@@ -199,9 +199,9 @@ void *create_thread(void *customer) {
 		flag = 1;
 		printf("Customer %d: Request Accepted.\n", customer_number);
 	}
-	printf("Request:\n");
-	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", request[i]);
-	printf("\n");
+	// printf("Request:\n");
+	// for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", request[i]);
+	// printf("\n");
 
 	if (flag == 1) {
 		sleep(rand() % 10);
