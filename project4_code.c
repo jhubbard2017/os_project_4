@@ -33,8 +33,8 @@ int need[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
 
 // Methods
 void show_matrix(int array[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES], char *array_name);
-int request_resources(int customer, int request[]);
-int release_resources(int customer, int release[]);
+int request_resources(int customer, int resources[]);
+int release_resources(int customer, int resources[]);
 
 
 void init_maximum() {
@@ -61,12 +61,12 @@ int release(int customer, int resources[], int safe) {
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
 		// Update resources allocated for customer
 		pthread_mutex_lock(&mAllocation);
-		allocation[customer][i] -= request[i];
+		allocation[customer][i] -= resources[i];
 		pthread_mutex_unlock(&mAllocation);
 
 		// Update resources available
 		pthread_mutex_lock(&mAvailable);
-		available[i] += request[i];
+		available[i] += resources[i];
 		pthread_mutex_unlock(&mAvailable);
 
 		// Update resources needed for customer
