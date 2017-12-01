@@ -10,6 +10,7 @@ Instructor: Dr. Hong
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -227,6 +228,7 @@ void show_matrix(int matrix[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES], char *nam
 int main(int argc, const char * argv[]) {
 	/* Main function */
 	int customer_count = 0;
+	int count = 40;
 	pthread_t tid;
 
 	// Get number of customers
@@ -249,9 +251,11 @@ int main(int argc, const char * argv[]) {
 	show_matrix(maximum, "Maximum");
 	show_matrix(need, "Need");
 
-	for (int i = 0; i < customer_count; i++) {
-		printf("\n Creating customer with id: %d", i);
-		pthread_create(&tid, NULL, create_thread, (void *)i);
+	for (int i = 0; i < count; i++) {
+		for (int j = 0; j < customer_count; j++) {
+			printf("\n Creating customer with id: %d", j);
+			pthread_create(&tid, NULL, create_thread, (void *)j);
+		}
 	}
 
 	printf("\nExiting Program\n");
