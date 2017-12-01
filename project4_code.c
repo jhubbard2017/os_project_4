@@ -48,7 +48,7 @@ void init_maximum() {
 	}
 }
 
-void release(int customer, int resources[], safe) {
+int release(int customer, int resources[], int safe) {
 	/* Method to release resources, updating available and needed resources for customer
 
 	args:
@@ -93,7 +93,7 @@ int request(int customer, int resources[]) {
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
 		// Update resources allocated for customer
 		pthread_mutex_lock(&mAllocation);
-		allocation[cnum][i] += resources[i];
+		allocation[customer][i] += resources[i];
 		pthread_mutex_unlock(&mAllocation);
 
 		// Update resources available
@@ -114,7 +114,7 @@ int request(int customer, int resources[]) {
 	return 0;
 }
 
-int request_resources(int customer, int request[]) {
+int request_resources(int customer, int resources[]) {
 	/* Method to request resources for a customer 
 
 	args:
@@ -125,11 +125,11 @@ int request_resources(int customer, int request[]) {
 		int
 	*/
 	printf("\n Recieved request from customer: %d", customer);
-	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", request[i]);
+	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) printf("%d, ", resources[i]);
 	printf("\n");
 
 	for (int i = 0; i < NUMBER_OF_RESOURCES; i++) {
-		if (request[i] > need[customer][i]) return 1;
+		if (resources[i] > need[customer][i]) return 1;
 	}
 
 	printf("\n Resources available:\n");
@@ -140,7 +140,7 @@ int request_resources(int customer, int request[]) {
 	show_matrix(need, "Need");
 	show_matrix(maximum, "Maximum");
 
-	return request(customer, request);
+	return request(customer, resources);
 }
 
 int release_resources(int customer, int resources[]) {
@@ -172,9 +172,9 @@ int check_if_safe() {
 	for (int i = 0; i < NUMBER_OF_CUSTOMERS; i++) {
 		if (finish[i] == 0) {
 			for (int j = 0; i < NUMBER_OF_RESOURCES; i++) {
-				if need[i][j] > work[j] return -1;
+				if (need[i][j] > work[j]) return -1;
 			}
-			for (int i = 0; i < NUMBER_OF_RESOURCES; i++) work[j] += allocation[i][j];
+			for (int j = 0; j < NUMBER_OF_RESOURCES; j++) work[j] += allocation[i][j];
 			success = 1;
 		}
 	}
@@ -245,7 +245,7 @@ int main(int argc, const char * argv[]) {
 	show_matrix(need, "Need");
 
 	for (int i = 0; i < customer_count; i++) {
-		printf("\n Creating customer with id: %d", count);
+		printf("\n Creating customer with id: %d", i);
 		pthread_create(&tid, NULL, create_thread, (void *)i);
 	}
 
