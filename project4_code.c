@@ -234,8 +234,12 @@ int main(int argc, const char * argv[]) {
 	scanf("%d", &customer_count);
 
 	if (NUMBER_OF_RESOURCES + 1 == argc) {
-		for (int i = 0; i < NUMBER_OF_RESOURCES; i++) available[i] = atoi(argv[i]);
-		show_matrix(available, "Available");
+		printf("\n Resources available:\n");
+		for (int i = 0; i < NUMBER_OF_RESOURCES; i++) { 
+			available[i] = atoi(argv[i]);
+			printf("%d, ", available[i]);	
+		}
+		printf("\n");
 	}
 
 	init_maximum();
